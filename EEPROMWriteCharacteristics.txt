@@ -1,0 +1,25 @@
+Writing protocol will be carried out by an Arduino.
+Write Options:
+1. Single Byte Write
+2. Page Write
+
+Single Byte:
+- OE must be held high
+- Either WE or CE is held low while the other toggles from high to low back to high
+- Important timing characteristics:
+	* address must be available at least 50ns before write pulse and before data is latched in
+	* either WE or CE must be low at least 50ns before write pulse
+	* write pulse must last at least 100ns
+	* data requires at least 50ns of setup time before write pulse ends
+- data hold time is said to be 0ns
+
+Page Write:
+- OE must be held high
+- CE and WE need to be toggled synchronously from high to low
+- data is latched on the rising edge of write pulse
+- Important timing characteristics:
+	* address must be held until rising edge of write pulse for at least 50ns
+	* data setup time is 50ns so it must be available 50ns before rising edge of write pulse
+	* data has 150us to be loaded before next byte
+	* write pulse width (low) must be at least 100ns and must be high for at least 50ns
+- full page write cycle requires waiting 10ms before data is available for reading

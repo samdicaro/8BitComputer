@@ -10,6 +10,7 @@ This project was originally inspired by Ben Eater's 8 bit computer: https://eate
 * SRAM: 8192 words by 8 bits.
 * EEPROM: 8192 word by 8 bits.
 ## TODO
+* Circuit diagram of processor.
 * Verilog description of the processor.
 * Expand hardware to 10 bits.
 * Outline the instruction set.

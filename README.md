@@ -1,7 +1,7 @@
 # 8BitComputer
 This repository will hold all the updates to the 8BitComputer machine code and assembly code.
 # Inspiration
-This project was originally inspired by Ben Eater's 8 bit computer.
+This project was originally inspired by Ben Eater's 8 bit computer: https://eater.net/8bit/
 The overall layout of the hardware follows Ben's in order to save space. Everything else is my own.
 The IC components, control word, and memory devices are not the same.
 # Hardware

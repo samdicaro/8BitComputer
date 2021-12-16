@@ -1,0 +1,43 @@
+*Control Word length is tentative.
+Control Word: 16 bits
+
+MAR En | PC En | PC Out | JMP | RAM RE | RAM WR | IR En | IR Out | Reg_A En | Reg_A Out | Reg_B En | Reg_B Out | ACC En | ACC Out | ALU Add | ALU Sub
+-Control signals must be available before the rising edge of clock.
+-Simplest practice is to compute next control at falling edge of the clock.
+
+Example:
+lw A, 21 -> stores data word @ address 0x015 in A register.
+Control Word (Step 1):
+1010_0000_0000_0000
+PC: 0000 -> address in RAM to fetch the address of IR.
+SRAM: 0000_1010 -> OPCode for lw (abitrary) is 0x0A.
+IR: 0000_0000
+
+Control Word (Step 2):
+0100_1010_0000_0000
+PC: 0001 -> address in RAM to fetch the address 21's data word.
+SRAM: 0000_1010 -> OPCode for lw (abitrary) is 0x0A.
+IR: 0000_1010
+
+Control Word (Step 3):
+1010_0000_0000_0000
+PC: 0001 -> address in RAM to fetch the address 21's data word.
+SRAM: 1001_1001 -> address 21's data is 0x99.
+IR: 0000_1010
+
+Control Word (Step 4);
+0100_1000_1000_0000
+PC: 0010 -> address for next instruction
+SRAM: 1001_1001
+Reg_A: 1001_1001
+IR: 0000_1010 
+
+
+***NOTES***
+SRAM is volatile therefore, write bootup ROM for instructions.
+Bootup stores opcodes for the first 16 instructions.
+When first powered on:
+- first programmable value in RAM = 16 => 0x010
+- PC should restart at 'b0000
+- load all of the instructions from address(A12:A0) 0x000 -> 0x00F
+- treat address 0x000 -> 0x00F as a cache of sorts so instructions do not need to be manually programmed in

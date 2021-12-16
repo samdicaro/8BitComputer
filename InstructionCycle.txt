@@ -1,0 +1,23 @@
+Fetch Stage:
+- PC is sent through data bus to the MAR (1 clock cycle)
+- MAR then reads SRAM and the word is sent through data bus to the IR (1 clock cycle)
+- PC is incremented
+
+Decode Stage:
+- counter is changed on negative edge of clock cycle to compute the upper portion of ROM address
+- lower portion of ROM address holds the opcode
+- data must be decoded and ready for the next clock cycle
+
+Execution Stage:
+- each control word is sent to the components and a process is performed
+- control instructions can span multiple clock cycles
+Example: Different address (steps) for a 1100's operation. Each address is read from ROM and sent to the cpu components.
+ROM has 13 address bits.
+0_0000_0000_1100 or 0_0000_0100_1100 or
+0_0000_0001_1100 or 0_0000_0101_1100 or
+0_0000_0010_1100 or 0_0000_0110_1100 or
+0_0000_0011_1100 or 0_0000_0111_1100
+- each instruction will get its own 8 different steps and possibly unique control signals
+- due to nature of fetch cycle, first few control words will be the same regardless of the opcode
+
+Repeat!!!!

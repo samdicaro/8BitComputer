@@ -1,0 +1,66 @@
+**Multiplication by Repeated Addition**
+
+C code:
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(){
+        int a = 7;
+        int b = 4;
+        int acc = 0;
+        for(int i=b;i!=0;i--){
+                acc = acc + a;
+        }
+        printf("Sum of %d * %d = %d.\n", a, b, acc);
+        return 0;
+}
+
+Assembly:
+
+li $t0, 7
+li $t1, 4
+li $t2, 0
+
+for:
+	beq $t1, $0, finish
+	nop
+	addu $t2, $t2, $t0
+	addiu $t1, $t1, -1
+	j for
+	nop
+
+finish:
+	nop
+
+This solution uses only 4 registers: t0, t1, t2, and 0.
+The computer will use the A, B, and ACC registers.
+The instructions used are load a, load b, branch equals, add, jump, and nop.
+The Boot ROM will store the 6 opcodes.
+lda:	0000
+ldb:	0001
+beq:	0010
+add:	0011
+j:	0100
+nop:	0101
+
+Program Counter starts at 0110.
+RAM:
+Address 		Data Word
+0_0000_0000_0000	xxxx_xxxx
+0_0000_0000_0001	xxxx_xxxx
+0_0000_0000_0010	xxxx_xxxx
+0_0000_0000_0011	xxxx_xxxx
+0_0000_0000_0100	xxxx_xxxx
+0_0000_0000_0101	xxxx_xxxx
+------------------------------------
+0_0000_0000_0110	xxxx_xxxx
+0_0000_0000_0111	xxxx_xxxx
+0_0000_0000_1000	xxxx_xxxx
+0_0000_0000_1001	xxxx_xxxx
+0_0000_0000_1010	xxxx_xxxx
+0_0000_0000_1011	xxxx_xxxx
+0_0000_0000_1100	xxxx_xxxx
+0_0000_0000_1101	xxxx_xxxx
+0_0000_0000_1110	xxxx_xxxx
+0_0000_0000_1111	xxxx_xxxx

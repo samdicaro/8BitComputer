@@ -39,28 +39,30 @@ The instructions used are load a, load b, branch equals, add, jump, and nop.
 The Boot ROM will store the 6 opcodes.
 lda:	0000
 ldb:	0001
-beq:	0010
-add:	0011
-j:	0100
+beq0:	0010
+addacc:	0011
+jmp:	0100
 nop:	0101
 
 Program Counter starts at 0110.
 RAM:
 Address 		Data Word
-0_0000_0000_0000	xxxx_xxxx
-0_0000_0000_0001	xxxx_xxxx
-0_0000_0000_0010	xxxx_xxxx
-0_0000_0000_0011	xxxx_xxxx
-0_0000_0000_0100	xxxx_xxxx
-0_0000_0000_0101	xxxx_xxxx
+0_0000_0000_0000	0000_0000 # lda
+0_0000_0000_0001	0000_0001 # ldb
+0_0000_0000_0010	0000_0010 # beq0
+0_0000_0000_0011	0000_0011 # addacc
+0_0000_0000_0100	0000_0100 # jmp
+0_0000_0000_0101	0000_0101 # nop
 ------------------------------------
-0_0000_0000_0110	xxxx_xxxx
-0_0000_0000_0111	xxxx_xxxx
-0_0000_0000_1000	xxxx_xxxx
-0_0000_0000_1001	xxxx_xxxx
-0_0000_0000_1010	xxxx_xxxx
-0_0000_0000_1011	xxxx_xxxx
-0_0000_0000_1100	xxxx_xxxx
-0_0000_0000_1101	xxxx_xxxx
-0_0000_0000_1110	xxxx_xxxx
-0_0000_0000_1111	xxxx_xxxx
+0_0000_0000_0110	0000_0000 # load a
+0_0000_0000_0111	0000_0111 # immediate value to load a with
+0_0000_0000_1000	0000_0001 # load b
+0_0000_0000_1001	0000_0100 # immediate value to load b with
+0_0000_0000_1010	0000_0010 # beq0
+0_0000_0000_1011	0001_0001 # memory address of the program to jump to
+0_0000_0000_1100	0000_0011 # add the value in the accumulator to a
+0_0000_0000_1101	xxxx_xxxx # add to b
+0_0000_0000_1110	1111_1111 # immediate value
+0_0000_0000_1111	0000_0100 # jump to address
+0_0000_0001_0000	0000_1010 # jump address
+0_0000_0001_0001	0000_0101 # nop???
